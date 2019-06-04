@@ -1,3 +1,3 @@
 <?php
 
-echo 'Travis Test App.';
+echo 'Travis Test App for creating debian package.';
