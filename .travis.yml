@@ -2,7 +2,7 @@ env:
   global:
   - PACKAGE_NAME=Insight2
 before_install:
-- export BUILD_VERSION=$(date "+%d").$TRAVIS_BUILD_NUMBER
+- export BUILD_VERSION=$v1.0.$TRAVIS_BUILD_NUMBER
 - export PACKAGE_NAME_VERSION=$PACKAGE_NAME.$BUILD_VERSION.deb
 script:
 - dpkg-deb --build $PACKAGE_NAME
