@@ -5,6 +5,16 @@ before_install:
 - export BUILD_VERSION=v1.0.$TRAVIS_BUILD_NUMBER
 - export PACKAGE_NAME_VERSION=$PACKAGE_NAME$BUILD_VERSION.deb
 
+cat > control <<- "EOF"
+Package: Insight
+Version: 1.0-1
+Section: base
+Priority: optional
+Architecture: i386
+Maintainer: Uptime <cx-eng-uptime@acquia.com>
+Description: Insight Deb Package
+EOF
+
 script:
 - dpkg-deb --build $PACKAGE_NAME
 - mv $PACKAGE_NAME.deb $PACKAGE_NAME_VERSION
