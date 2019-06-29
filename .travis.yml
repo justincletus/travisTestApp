@@ -1,10 +1,31 @@
 env:
   global:
-  - PACKAGE_NAME=Insight2
+  - PACKAGE_NAME=TravisTest
 before_install:
-- export BUILD_VERSION=v1.0.$TRAVIS_BUILD_NUMBER
-- export PACKAGE_NAME_VERSION=$PACKAGE_NAME$BUILD_VERSION.deb
+  - export BUILD_VERSION=v1.0.$TRAVIS_BUILD_NUMBER
+  - export PACKAGE_NAME_VERSION=$PACKAGE_NAME$BUILD_VERSION.deb
 
+# cat > control <<- "EOF"
+# Package: Insight
+# Version: 1.0-1
+# Section: base
+# Priority: optional
+# Architecture: i386
+# Maintainer: Uptime <cx-eng-uptime@acquia.com>
+# Description: Insight Deb Package
+# EOF
+
+$ cat control
+Package: TravisTest
+Version: 1.4.24-4
+Section: admin
+Priority: optional
+Architecture: i386
+Suggests: parted-doc
+Conflicts: fsresize
+Replaces: fsresize
+Installed-Size: 76
+Maintainer: Justin Cletus <justinbeckh@gmail.com>
 
 script:
 - dpkg-deb --build $PACKAGE_NAME
@@ -16,5 +37,5 @@ after_success:
 after_script:
 - |
   echo "Uploading package(s) to $FTP_URL ...".$TRAVIS_BUILD_NUMBER
-  curl -u $justincletus:$@03Jgabi --ftp-create-dirs -T $PACKAGE_NAME_VERSION ftp://$103.228.112.110/httpdocs/$PACKAGE_NAME_VERSION || DEPLOY_FAILURE=true ;
+  curl -u $justincletus:$@ --ftp-create-dirs -T $PACKAGE_NAME_VERSION ftp://$/httpdocs/$PACKAGE_NAME_VERSION || DEPLOY_FAILURE=true ;
   if [[ $DEPLOY_FAILURE == 'true' ]]; then echo "Uploading package(s) failed!"; travis_terminate 1; fi;
