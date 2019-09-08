@@ -3,5 +3,6 @@ node{
     git 'https://github.com/justincletus/travisTestApp/'
   }
   stage('Compile-Package') {
+    sh 'ls -l'
   }
 }
